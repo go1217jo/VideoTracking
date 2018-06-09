@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+			<meta charset="utf-8">
+			<title>video viewer</title>
+			<link href="http://vjs.zencdn.net/6.6.0/video-js.css" rel="stylesheet">
+			<link rel="stylesheet" href="./web.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<header>
+			<h1 class="title">Video Viewer</h1>
+			<hr id="line">
+
+		</header>
+
+	<main>
+		<div class="row1">
+		  <div class="col1">
+				<section class="video">
+					<video class="video-js" preload="auto" id="screen" controls>
+						<source src="./microcomputer.mp4" type="video/mp4">
+					</video>
+				</section>
+			</div>
+
+			<div class="col2">
+			  <div id="btnset">
+				  <button type="button" download="Canvas.png" class="btn btn-primary" id="btn1"> 보내기 </button>
+				  <button type="button" download="Canvas.png" class="btn btn-success" id="btn2"> 저장 </button>
+				  <a class="downlink" id="download" download="Capture.png"></a>
+			  </div>
+            </div>
+		</div>
+		<div class="row2">
+			<div class="col3">
+				<canvas id="capture"></canvas>
+			</div>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+
+		var video;
+		var capScreen;
+		window.onload = function() {
+			video = document.getElementById("screen")
+			capScreen = document.getElementById("capture")
+		}
+
+		function download() {
+			var dest = capture.toDataURL();
+			this.href = dest;
+		};
+
+		document.getElementById('download').addEventListener('click', download, false);
+
+		btn1.onclick = function() {
+			if(!capScreen)
+				capScreen = document.getElementById("capture")
+			if(!video)
+				video = document.getElementById("screen")
+			var ctx = capScreen.getContext("2d");
+			capScreen.width = video.clientWidth;
+			capScreen.height = video.clientHeight;
+			ctx.drawImage(video,0,0,capScreen.width, capScreen.height);
+		}
+
+		btn2.onclick = function() {
+			if(!capScreen)
+				capScreen = document.getElementById("capture")
+			if(!video)
+				video = document.getElementById("screen")
+			var ctx = capScreen.getContext("2d")
+			capScreen.width = video.clientWidth;
+			capScreen.height = video.clientHeight;
+			ctx.drawImage(video,0,0,capScreen.width, capScreen.height);
+			$('#download')[0].click();
+		}
+
+	</script>
+
+	</body>
+</html>
