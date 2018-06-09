@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-subjects = ["", "MrLee", "Elvis Presley"]
+subjects = ["", "MrLee", "Sunggyu"]
 
 def draw_rectangle(img, rect):
     (x, y, w, h) = rect
@@ -152,6 +152,27 @@ def tracking():
         print('비디오 로딩 실패')
         return
 
+    #재생할 파일의 넓이 얻기
+    width = vidcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    #재생할 파일의 높이 얻기
+    height = vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    #재생할 파일의 프레임 레이트 얻기
+    fps = vidcap.get(cv2.CAP_PROP_FPS)
+
+    #windows 계열 DIVX 사용
+    #저장할 비디오 코덱
+    #fourcc = cv2.CV_FOURCC(*'DIVX')
+    #저장할 파일 이름
+    filename = 'image_detection_result_video.avi'
+
+    #파일 stream  생성
+    out = cv2.VideoWriter(filename,  cv2.VideoWriter_fourcc(*'XVID'), fps, (int(width), int(height)))
+    #filename : 파일 이름
+    #fourcc : 코덱
+    #fps : 초당 프레임 수
+    #width : 넓이
+    #height : 높이
+
     while(vidcap.isOpened()):
         ret, frame = vidcap.read()
 
@@ -161,12 +182,19 @@ def tracking():
         if(int(vidcap.get(1)) % 2 == 1):
             predicted_frame = predict(frame)
 
+            #결과 동영상에 프레임 저장
+            out.write(predicted_frame)
+
             cv2.imshow('frame', predicted_frame)
             k = cv2.waitKey(30)
             if k == 27:
                 break
 
+    #재생 파일 종료
     vidcap.release()
+    #저장 파일 종료
+    out.release()
+    #윈도우 종료
     cv2.destroyAllWindows()
 
 tracking()
