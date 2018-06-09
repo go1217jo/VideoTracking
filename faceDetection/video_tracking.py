@@ -2,9 +2,6 @@ import cv2
 import os
 import numpy as np
 
-face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-subjects = ["", "MrLee", "Elvis Presley"]
-
 def draw_rectangle(img, rect):
     (x, y, w, h) = rect
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
@@ -106,7 +103,7 @@ def detect_face(img):
     #return only the face part of the image
     return gray[y:y+w, x:x+h], faces[0]
 
-def predict(test_img):
+def predict(test_img, face_recognizer, subjects):
     #make a copy of the image as we don't want to chang original image
     img = test_img.copy()
 
@@ -130,12 +127,15 @@ def predict(test_img):
     return img
 
 def tracking():
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    subjects = ["", "MrLee", "SungGyu"]
+
     #let's first prepare our training data
     #data will be in two lists of same size
     #one list will contain all the faces
     #and other list will contain respective labels for each face
     print("Preparing data...")
-    faces, labels = prepare_training_data("training-data")
+    faces, labels = prepare_training_data("./training-data")
     print("Data prepared")
 
     #print total faces and labels
@@ -159,7 +159,7 @@ def tracking():
             break
 
         if(int(vidcap.get(1)) % 2 == 1):
-            predicted_frame = predict(frame)
+            predicted_frame = predict(frame, face_recognizer, subjects)
 
             cv2.imshow('frame', predicted_frame)
             k = cv2.waitKey(30)
