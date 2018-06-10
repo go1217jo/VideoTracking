@@ -21,24 +21,26 @@
 	<main>
 		<div class="row1">
 		  <div class="col1">
-			<div id="cp_widget_0903e50b-5057-4a00-9419-dd8c16c1523b">...</div><script type="text/javascript">
-				var cpo = []; cpo["_object"] ="cp_widget_0903e50b-5057-4a00-9419-dd8c16c1523b"; cpo["_fid"] = "AwEAZSO4PJed";
-				var _cpmp = _cpmp || []; _cpmp.push(cpo);
-				(function() { var cp = document.createElement("script"); cp.type = "text/javascript";
-				cp.async = true; cp.src = "//www.cincopa.com/media-platform/runtime/libasync.js";
-				var c = document.getElementsByTagName("script")[0];
-				c.parentNode.insertBefore(cp, c); })(); </script><noscript><span>New Gallery 2018/6/10</span><span>bitrate</span><span> 4931
-				kb/s</span><span>height</span><span> 480</span><span>duration</span><span> 00:01:26.12</span><span>fps</span><span> 29.97</span>
-				<span>width</span><span> 856</span></noscript>
-			</div>
-
+				<!--얼굴인식 결과 동영상(image_detection_result_video.avi) 재생하는 동영상 플레이어-->
+					<div id="cp_widget_0903e50b-5057-4a00-9419-dd8c16c1523b">...</div><script type="text/javascript">
+					var cpo = []; cpo["_object"] ="cp_widget_0903e50b-5057-4a00-9419-dd8c16c1523b"; cpo["_fid"] = "AwEAZSO4PJed";
+					var _cpmp = _cpmp || []; _cpmp.push(cpo);
+					(function() { var cp = document.createElement("script"); cp.type = "text/javascript";
+					cp.async = true; cp.src = "//www.cincopa.com/media-platform/runtime/libasync.js";
+					var c = document.getElementsByTagName("script")[0];
+					c.parentNode.insertBefore(cp, c); })(); </script><noscript><span>New Gallery 2018/6/10</span><span>bitrate</span><span> 4931
+					kb/s</span><span>height</span><span> 480</span><span>duration</span><span> 00:01:26.12</span><span>fps</span><span> 29.97</span>
+					<span>width</span><span> 856</span></noscript>
+		  </div>
+			<video id="screen" controls>
+			</video>
 			<div class="col2">
 			  <div id="btnset">
-				  <button type="button" download="Canvas.png" class="btn btn-primary" id="btn1"> 보내기 </button>
-				  <button type="button" download="Canvas.png" class="btn btn-success" id="btn2"> 저장 </button>
+				  <!--<button type="button" class="btn btn-primary" id="btn1"> 학습 </button>-->
+				  <button type="button" download="Canvas.png" class="btn btn-success" id="btn2"> 캡쳐 </button>
 				  <a class="downlink" id="download" download="Capture.png"></a>
 			  </div>
-            </div>
+      </div>
 		</div>
 		<div class="row2">
 			<div class="col3">
@@ -62,17 +64,6 @@
 		};
 
 		document.getElementById('download').addEventListener('click', download, false);
-
-		btn1.onclick = function() {
-			if(!capScreen)
-				capScreen = document.getElementById("capture")
-			if(!video)
-				video = document.getElementById("screen")
-			var ctx = capScreen.getContext("2d");
-			capScreen.width = video.clientWidth;
-			capScreen.height = video.clientHeight;
-			ctx.drawImage(video,0,0,capScreen.width, capScreen.height);
-		}
 
 		btn2.onclick = function() {
 			if(!capScreen)
