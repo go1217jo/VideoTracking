@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #추가적인 경로 설정
+    'faceDetection.apps.FacedetectionConfig',
+    #기본 설정
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
